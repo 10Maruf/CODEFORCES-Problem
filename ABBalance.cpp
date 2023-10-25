@@ -28,7 +28,7 @@ int Case = 1;
 void solve()
 {
     string s;
-    cin>>s;
+    cin >> s;
     int ab_c = 0, ba_c = 0;
     string ab = "ab", ba = "ba";
     int pos = 0;
@@ -49,11 +49,42 @@ void solve()
     {
         cout << s << endl;
     }
-     else
+    else
+    {
+        for (int i = 0; i < s.size(); i++)
         {
-            for (int i = 0; i < s.size(); i++)
+            int ab_c = 0, ba_c = 0;
+            if (s[i] == 'a')
             {
-                int ab_c = 0, ba_c = 0;
+                s[i] = 'b';
+            }
+            else
+            {
+                s[i] = 'a';
+            }
+            for (int j = 0; j < s.size() - 1; j++)
+            {
+                if (s[j] == 'a' and s[j + 1] == 'b')
+                {
+                    ab_c++;
+                    j++;
+                }
+            }
+            for (int j = 0; j < s.size() - 1; j++)
+            {
+                if (s[j] == 'b' and s[j + 1] == 'a')
+                {
+                    ba_c++;
+                    j++;
+                }
+            }
+            if (ab_c == ba_c)
+            {
+                cout << s << endl;
+                break;
+            }
+            else
+            {
                 if (s[i] == 'a')
                 {
                     s[i] = 'b';
@@ -62,40 +93,9 @@ void solve()
                 {
                     s[i] = 'a';
                 }
-                for (int j = 0; j < s.size() - 1; j++)
-                {
-                    if (s[j] == 'a' and s[j + 1] == 'b')
-                    {
-                        ab_c++;
-                        j++;
-                    }
-                }
-                for (int j = 0; j < s.size() - 1; j++)
-                {
-                    if (s[j] == 'b' and s[j + 1] == 'a')
-                    {
-                        ba_c++;
-                        j++;
-                    }
-                }
-                if (ab_c == ba_c)
-                {
-                    cout << s << endl;
-                    break;
-                }
-                else
-                {
-                    if (s[i] == 'a')
-                    {
-                        s[i] = 'b';
-                    }
-                    else
-                    {
-                        s[i] = 'a';
-                    }
-                }
             }
         }
+    }
 }
 
 signed main()
