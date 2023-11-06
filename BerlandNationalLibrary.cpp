@@ -24,36 +24,39 @@ using namespace std;
 */
 
 int Case = 1;
-
+map<ll, ll> m;
+ll r;
+int man = 0, final = 0;
 void solve()
 {
-    vector<int>v;
-   map<int, int> Map;
-
-    for (auto x : v) {
-        cin>>v[x];
-        Map[v[x]]++;
+    char c;
+    cin >> c >> r;
+    if (c == '+')
+    {
+        m[r]++;
+        man++;
     }
-
-    // Print the distinct s
-    std::cout << "Distinct s in the array: ";
-    for (const auto& entry : Map) {
-        std::cout << entry.first << " ";
+    else
+    {
+        if (m[r] > 0)
+        {
+            man--;
+        }
+        else
+            final++;
     }
-    std::cout << std::endl;
-   
-   
 }
 
 signed main()
 {
     IO;
-    int t;
+    ll t;
     cin >> t;
     while (t--)
     {
         solve();
+        final = max(final, man);
     }
-
+    cout << final;
     return 0;
 }

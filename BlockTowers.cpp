@@ -27,22 +27,21 @@ int Case = 1;
 
 void solve()
 {
-    vector<int>v;
-   map<int, int> Map;
+    int n;
+    cin >> n;
 
-    for (auto x : v) {
-        cin>>v[x];
-        Map[v[x]]++;
+    vec v(n);
+    fcin(v);
+    int first_tower = v[0];
+    sort(v.begin() + 1, v.end());
+    for (int i = 1; i < n; i++)
+    {
+        if (v[i] > first_tower)
+        {
+            first_tower += (v[i] - first_tower + 1) / 2;
+        }
     }
-
-    // Print the distinct s
-    std::cout << "Distinct s in the array: ";
-    for (const auto& entry : Map) {
-        std::cout << entry.first << " ";
-    }
-    std::cout << std::endl;
-   
-   
+    cout << first_tower << endl;
 }
 
 signed main()
