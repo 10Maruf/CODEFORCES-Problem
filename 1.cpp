@@ -1,70 +1,70 @@
-/*maruf_bro*/
+#include <stdio.h>
+#include <stdlib.h>
 
-#include <bits/stdc++.h>
-using namespace std;
-#define IO                            \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL)
-#define ld long double
-#define ll long long
-#define vec vector<ll>
-#define pb push_back
-#define fcin(n)       \
-    for (auto &x : n) \
-    cin >> x
-#define fcout(n)     \
-    for (auto x : n) \
-    cout << x << " "
-#define YES puts("YES")
-#define NO puts("NO")
-#define endl '\n'
-/*
- "The harder the problem, the sweeter the victory. Keep coding!"
-*/
-
-int Case = 1;
-
-void solve()
+struct Node
 {
-    int n;
-    cin >> n;
+    int data;
+    struct Node *next;
+};
 
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i)
+void linkedlistTraversal(struct Node *ptr)
+{
+    while (ptr != NULL)
     {
-        cin >> a[i];
-    }
-
-    int mini = *min_element(a.begin(), a.end());
-
-    int operations = 0;
-    for (int i = 0; i < n; ++i)
-    {
-        operations += (a[i] - mini);
-    }
-
-    cout << operations << endl;
-
-    if (operations <= n)
-    {
-        for (int i = 0; i < operations; ++i)
-        {
-            cout << mini << " ";
-        }
-        cout << endl;
+        printf("Element: %d\t", ptr->data);
+        ptr = ptr->next;
     }
 }
 
-signed main()
+struct Node *insertAtFirst(struct Node *head, int data)
 {
-    IO;
-    int t;
-    cin >> t;
-    while (t--)
+    struct Node *ptr = (struct Node *)malloc(sizeof(struct Node));
+    ptr->data = data;
+    ptr->next = head;
+    head = ptr;
+    return head;
+}
+
+int main()
+{
+    struct Node *head = NULL, *ptr;
+
+    int n, data;
+
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++)
     {
-        solve();
+        printf("Enter data for node %d: ", i + 1);
+        scanf("%d", &data);
+        struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->data = data;
+        newNode->next = NULL;
+        // Insert a new node at the end for each input
+        if (head == NULL)
+        {
+            head = newNode;
+        }
+        else
+        {
+            struct Node *ptr = head;
+            while (ptr->next != NULL)
+            {
+                ptr = ptr->next;
+            }
+
+            ptr->next = newNode;
+        }
     }
+
+    printf("Linked List:\n");
+    linkedlistTraversal(head);
+
+    printf("\nEnter data for node to insert at first: ");
+    scanf("%d", &data);
+    head = insertAtFirst(head, data);
+    linkedlistTraversal(head);
 
     return 0;
 }
