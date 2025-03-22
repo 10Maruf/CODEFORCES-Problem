@@ -27,25 +27,36 @@ int Case = 1;
 
 void solve()
 {
-    ll n, m;
-    cin >> n >> m;
-    map<ll, ll> cnt;
-    vector<ll> a(n), r(n);
-    fcin(a);
-    fcin(r);
-    for (ll i = 0; i < n; i++)
-    {
-        ll pos = a[i], rr = r[i];
-        for (ll x = pos - rr; x <= pos + rr; x++)
-        {
-            cnt[x] = max(cnt[x], 2 * (ll)sqrt(rr * rr - (x - pos) * (x - pos)) + 1);
-        }
-    }
-    ll ans = 0;
-    for (const auto &p : cnt)
-        ans += p.second;
+    srand(time(0));
 
-    cout << ans << endl;
+    int n;
+    cin >> n;
+    if (n < 0)
+        return;
+    vec v(n);
+    for (int i = 0; i < n; i++)
+        v[i] = i + 1;
+    random_shuffle(v.begin(), v.end());
+    int ii = v[0], jj = v[1], kk = v[2];
+    cerr << n << endl;
+    while (true)
+    {
+        cout << "? " << ii << " " << jj << " " << kk << endl;
+        int id;
+        cin >> id;
+        if (id < 0)
+            return;
+        if (id == 0)
+            break;
+        int sw = rand() % 3 + 1;
+        if (sw == 1)
+            ii = id;
+        else if (sw == 2)
+            jj = id;
+        else
+            kk = id;
+    }
+    cout << "! " << ii << " " << jj << " " << kk << endl;
 }
 
 signed main()
@@ -60,6 +71,3 @@ signed main()
 
     return 0;
 }
-
-
-
