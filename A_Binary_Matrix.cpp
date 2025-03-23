@@ -16,7 +16,8 @@ using namespace std;
 #define fcout(n)     \
     for (auto x : n) \
     cout << x << " "
-
+#define YES puts("YES")
+#define NO puts("NO")
 #define endl '\n'
 /*
  "The harder the problem, the sweeter the victory. Keep coding!"
@@ -26,36 +27,37 @@ int Case = 1;
 
 void solve()
 {
-    srand(time(0));
-
-    int n;
-    cin >> n;
-    if (n < 0)
-        return;
-    vec v(n);
-    for (int i = 0; i < n; i++)
-        v[i] = i + 1;
-    random_shuffle(v.begin(), v.end());
-    int ii = v[0], jj = v[1], kk = v[2];
-    cerr << n << endl;
-    while (true)
+    ll n, m, rcnt = 0, ccnt = 0;
+    cin >> n >> m;
+    vector<string> matrix(n);
+    for (ll i = 0; i < n; i++)
     {
-        cout << "? " << ii << " " << jj << " " << kk << endl;
-        int id;
-        cin >> id;
-        if (id < 0)
-            return;
-        if (id == 0)
-            break;
-        int sw = rand() % 3 + 1;
-        if (sw == 1)
-            ii = id;
-        else if (sw == 2)
-            jj = id;
-        else
-            kk = id;
+        cin >> matrix[i];
     }
-    cout << "! " << ii << " " << jj << " " << kk << endl;
+
+    for (ll i = 0; i < n; i++)
+    {
+        ll rxor = 0;
+        for (ll j = 0; j < m; j++)
+        {
+
+            rxor ^= (matrix[i][j] - '0');
+        }
+        if (rxor == 1)
+            rcnt++;
+    }
+    for (ll i = 0; i < m; i++)
+    {
+        ll cxor = 0;
+        for (ll j = 0; j < n; j++)
+        {
+
+            cxor ^= (matrix[j][i] - '0');
+        }
+        if (cxor == 1)
+            ccnt++;
+    }
+    cout << max(rcnt, ccnt) << endl;
 }
 
 signed main()
