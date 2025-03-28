@@ -24,38 +24,21 @@ using namespace std;
 */
 
 int Case = 1;
-
-vector<bool> sieve(int n)
-{
-    vector<bool> prime(n, 1);
-    prime[0] = prime[1] = 0;
-    for (int i = 2; i * i < n; i++)
-    {
-        if (prime[i])
-        {
-            for (int j = i * i; j < n; j += i)
-                prime[j] = 0;
-        }
-    }
-
-    return prime;
-}
+ll MOD = (1e9 + 7);
+ll INV2 = (5e8 + 4);
 void solve()
 {
-    int n;
+    ll n;
+    string str;
     cin >> n;
-    int ans = 0;
-    vector<bool> prime = sieve(n + 1);
-    // for(auto it : prime) cout<<it<<" ";
+    cin >> str;
+    ll ans = 0;
 
-    for (int i = 0; i < n + 1; i++)
+    for (ll i = n - 1; i > 0; --i)
     {
-        if (prime[i])
-        {
-            ans += n / i;
-        }
+        ans = (ans + (str[i] == '1')) * INV2 % MOD;
     }
-    cout << ans << endl;
+    cout << ans + n - 1 << endl;
 }
 
 signed main()
